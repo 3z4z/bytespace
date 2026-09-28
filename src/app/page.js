@@ -1,7 +1,9 @@
+import HeroSection from "./_sections/Hero";
+
 export default function HomePage() {
   return (
     <>
-      <p>This is homepage</p>
+      <HeroSection />
     </>
   );
 }
