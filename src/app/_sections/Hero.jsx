@@ -138,9 +138,9 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative bg-secondary overflow-hidden min-h-screen"
+      className="relative bg-secondary bg-[linear-gradient(to_right,#ffffff32_1px,transparent_1px),linear-gradient(to_bottom,#ffffff32_1px,transparent_1px)]
+  bg-size-[120px_120px] overflow-hidden min-h-screen"
     >
-      <HeaderComponent />
       <main className="base-container">
         <div className="max-w-232 mx-auto *:text-center text-white">
           <h1 className="md:mt-30 mt-24 pt-12 xl:text-7xl lg:text-6xl md:text-5xl text-4xl xl:leading-23 lg:leading-20 md:leading-17 leading-14 pb-8 tracking-tight">

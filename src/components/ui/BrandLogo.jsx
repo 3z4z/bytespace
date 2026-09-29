@@ -28,7 +28,7 @@ export default function BrandLogo({ textColor }) {
     { scope: containerRef },
   );
   return (
-    <Link ref={containerRef} href={"/"} className="flex items-center gap-2">
+    <Link ref={containerRef} href={"/"} className="flex items-center gap-2 z-2">
       <figure className="relative size-8">
         <Image
           fill

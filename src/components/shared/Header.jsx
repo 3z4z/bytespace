@@ -4,13 +4,16 @@ import BrandLogo from "../ui/BrandLogo";
 import { CartIcon } from "../icons/Icons";
 import NavbarComponent from "./Navbar";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import useGsapHover from "@/hooks/useGsapHover";
 import Hamburger from "hamburger-react";
+import NavbarResponsiveComponent from "./NavbarResponsive";
 
 export default function HeaderComponent() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const containerRef = useRef();
   const { handleMouseEnter, handleMouseLeave } = useGsapHover();
   useGSAP(
@@ -31,7 +34,7 @@ export default function HeaderComponent() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full md:py-10 py-5 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 z-50 w-full md:py-10 py-5 backdrop-blur-xl bg-secondary/75">
       <div className="flex justify-between base-container">
         <BrandLogo textColor={"white"} />
         <NavbarComponent />
@@ -49,9 +52,10 @@ export default function HeaderComponent() {
             </li>
           ))}
         </ul>
-        <div className="md:hidden text-white">
-          <Hamburger size={18} rounded />
+        <div className="md:hidden text-white z-2">
+          <Hamburger size={18} toggled={isOpen} toggle={setIsOpen} rounded />
         </div>
+        <NavbarResponsiveComponent isOpen={isOpen} />
       </div>
     </header>
   );

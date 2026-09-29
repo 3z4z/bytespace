@@ -54,16 +54,28 @@
   --color-primary-content: var(--color-shuttle-gray-900);
   --color-secondary: var(--color-persian-blue-800);
   --color-base-100: var(--color-shuttle-gray-50);
+  --color-base-content: var(--color-shuttle-gray-950);
 }
 
 body {
   font-family: var(--font-satoshi);
+  background-color: var(--color-white);
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
   font-family: var(--font-poppins);
+}
+h1,
+h2,
+h3 {
   font-weight: 600;
+}
+
+h4 {
+  font-weight: 500;
 }
 
 .font-clash {
@@ -71,7 +83,7 @@ h2 {
 }
 
 .base-container {
-  @apply max-w-360 mx-auto px-3;
+  @apply max-w-360 w-full mx-auto px-3;
 }
 
 .btn,
