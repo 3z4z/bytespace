@@ -94,7 +94,7 @@ h4 {
 }
 
 input {
-  @apply outline-0! transition;
+  @apply outline-0! transition bg-white;
 }
 
 .bg-gradient-rtl {
@@ -107,4 +107,8 @@ input {
 
 .bg-grid-secondary {
   @apply bg-secondary bg-[linear-gradient(to_right,#ffffff32_1px,transparent_1px),linear-gradient(to_bottom,#ffffff32_1px,transparent_1px)] bg-size-[120px_120px];
+}
+
+.auth-form {
+  @apply lg:py-12 md:py-10 sm:py-8 py-7 flex flex-col lg:gap-6 sm:gap-5 gap-4;
 }
