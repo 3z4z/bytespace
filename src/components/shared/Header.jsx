@@ -1,7 +1,7 @@
 "use client";
 
 import BrandLogo from "../ui/BrandLogo";
-import { CartIcon } from "../icons/Icons";
+import { CartIcon, UserIcon } from "../icons/Icons";
 import NavbarComponent from "./Navbar";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -115,7 +115,7 @@ export default function HeaderComponent() {
       ref={headerRef}
       className="fixed top-0 left-0 z-50 w-full lg:py-10 md:py-7 sm:py-5 py-4 transition-colors duration-300 ease-in-out"
     >
-      <div className="flex justify-between base-container max-2xl:px-6!">
+      <div className="flex justify-between base-container max-2xl:px-6! max-sm:px-3!">
         <BrandLogo textColor="white" />
         <NavbarComponent />
         <ul
@@ -132,8 +132,14 @@ export default function HeaderComponent() {
             </li>
           ))}
         </ul>
-        <div className="lg:hidden text-white z-20">
-          <Hamburger size={18} toggled={isOpen} toggle={setIsOpen} rounded />
+        <div className="lg:hidden text-white z-20 flex gap-2 items-center">
+          <Link
+            href={"/auth/login"}
+            className="size-9 rounded-full flex items-center justify-center btn btn-primary p-0 text-lg border-none"
+          >
+            <UserIcon />
+          </Link>
+          <Hamburger size={16} toggled={isOpen} toggle={setIsOpen} rounded />
         </div>
         <NavbarResponsiveComponent isOpen={isOpen} />
       </div>

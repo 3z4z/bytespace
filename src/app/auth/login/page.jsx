@@ -1,14 +1,38 @@
 "use client";
 
-import { FacebookIcon, GoogleIcon } from "@/components/icons/Icons";
+import {
+  FacebookIcon,
+  GoogleIcon,
+  SpinnerIcon,
+} from "@/components/icons/Icons";
 import AuthContentComponent from "@/components/shared/AuthContent";
 import AuthFormTitleComponent from "@/components/shared/AuthFormTitle";
+import SocialLogin from "@/components/shared/SocialLogin";
 import AuthFormCard from "@/components/ui/AuthFormCard";
+import { className } from "@/utils/className";
+import { regex } from "@/utils/regex";
 import { toastConfig } from "@/utils/toastConfig";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function LoginPage() {
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const handleKeyDown = (e) => {
+    if (e.key === " ") {
+      e.preventDefault();
+    }
+  };
   const handleFacebookLogin = () => {
     const errorMessage = "Facebook login under maintenance. Try again later.";
     toast.error(errorMessage, { ...toastConfig });
@@ -16,6 +40,9 @@ export default function LoginPage() {
 
   const handleGoogleLogin = () => {
     toast.info("Google login coming soon!", { ...toastConfig });
+  };
+  const onLoginSubmit = (data) => {
+    console.log(data);
   };
   return (
     <AuthContentComponent
@@ -26,45 +53,77 @@ export default function LoginPage() {
     >
       <AuthFormCard>
         <AuthFormTitleComponent heading="Welcome Back" title="Sign In" />
-        <form className="auth-form">
-          <fieldset className="w-full">
+        <form onSubmit={handleSubmit(onLoginSubmit)} className="auth-form">
+          <fieldset className="w-full relative">
             <label className="text-sm">Email</label>
             <input
               type="email"
-              placeholder="user@email.com"
-              className="input w-full mt-2 py-5 focus:border-secondary border-shuttle-gray-100"
+              placeholder="john.smith@email.com"
+              className={className(errors.email)}
+              {...register("email", {
+                required: regex.email.required,
+                pattern: {
+                  value: regex.email.value,
+                  message: regex.email.invalid,
+                },
+                onChange: (e) => {
+                  e.target.value = e.target.value.replace(/\s/g, "");
+                },
+              })}
+              onKeyDown={handleKeyDown}
             />
+            <p
+              className={`absolute left-2 transition-all duration-175 text-error font-medium text-xs ${
+                errors.email
+                  ? "top-19 opacity-100"
+                  : "top-16 opacity-0 pointer-events-none"
+              }`}
+            >
+              {errors.email?.message}
+            </p>
           </fieldset>
-          <fieldset className="w-full">
+          <fieldset className="w-full relative">
             <label className="text-sm">Password</label>
             <input
               type="password"
               placeholder="******"
-              className="input w-full mt-2 py-5 focus:border-secondary border-shuttle-gray-100"
+              className={className(errors.email)}
+              {...register("password", {
+                required: regex.password.required,
+                pattern: {
+                  value: regex.password.value,
+                  message: regex.password.invalid,
+                },
+              })}
             />
+            <p
+              className={`absolute left-2 transition-all duration-175 text-error font-medium text-xs ${
+                errors.password
+                  ? "top-19 opacity-100"
+                  : "top-16 opacity-0 pointer-events-none"
+              }`}
+            >
+              {errors.password?.message}
+            </p>
           </fieldset>
           <div className="ms-auto">
-            <button className="btn btn-primary btn-lg w-max px-7 border-none">
-              Sign In
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn btn-primary btn-lg w-max px-7 border-none"
+            >
+              {isSubmitting ? (
+                <>
+                  <SpinnerIcon />
+                  Signing in
+                </>
+              ) : (
+                "Sign In"
+              )}
             </button>
           </div>
           <div className="divider">or</div>
-          <div className="flex justify-center gap-5">
-            <button
-              type="button"
-              onClick={handleFacebookLogin}
-              className="btn bg-transparent hover:bg-secondary/5 grayscale-100 hover:grayscale-0 size-20 flex items-center justify-center rounded-2xl! group transition-all"
-            >
-              <FacebookIcon className="size-10 contrast-200 group-hover:contrast-100" />
-            </button>
-            <button
-              type="button"
-              onClick={handleGoogleLogin}
-              className="btn bg-transparent hover:bg-secondary/5 grayscale-100 hover:grayscale-0 size-20 flex items-center justify-center rounded-2xl! group transition-all"
-            >
-              <GoogleIcon className="size-10 contrast-200 group-hover:contrast-100" />
-            </button>
-          </div>
+          <SocialLogin />
         </form>
         <div className="text-center">
           <p className="text-lg">
