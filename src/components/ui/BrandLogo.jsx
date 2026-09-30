@@ -11,19 +11,21 @@ export default function BrandLogo({ textColor, motion = true }) {
 
   useGSAP(
     () => {
-      gsap.fromTo(
-        containerRef.current,
-        {
-          x: -150,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.75,
-          ease: "power1",
-        },
-      );
+      motion
+        ? gsap.fromTo(
+            containerRef.current,
+            {
+              x: -150,
+              opacity: 0,
+            },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.75,
+              ease: "power1",
+            },
+          )
+        : null;
     },
     { scope: containerRef },
   );

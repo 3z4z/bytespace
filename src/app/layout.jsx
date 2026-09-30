@@ -1,10 +1,10 @@
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import "../styles/globals.css";
-import HeaderComponent from "@/components/shared/Header";
-import FooterComponent from "@/components/shared/Footer";
 import AppLayoutWrapper from "@/components/shared/AppLayoutWrapper";
 import { ToastContainer } from "react-toastify";
+import { SessionProvider } from "next-auth/react";
+import AuthSessionProvider from "./providers/AuthSessionProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -34,10 +34,12 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${poppins.variable} ${satoshi.variable} ${clashDisplay.variable} h-full antialiased`}
     >
-      <body className="min-h-dvh flex flex-col">
-        <AppLayoutWrapper>{children}</AppLayoutWrapper>
-        <ToastContainer />
-      </body>
+      <AuthSessionProvider>
+        <body className="min-h-dvh flex flex-col">
+          <AppLayoutWrapper>{children}</AppLayoutWrapper>
+          <ToastContainer />
+        </body>
+      </AuthSessionProvider>
     </html>
   );
 }
