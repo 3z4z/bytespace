@@ -7,18 +7,21 @@ export default function SectionTitle({
   titleColor = "text-base-content",
   titleMarginBottom = "mb-5",
   maxWidth = "max-w-248",
+  titleClass = "",
+  subtitleClass = "",
+  baseMarginTop = "mt-18",
 }) {
   return (
     <header
-      className={`mt-18 mb-16 ${maxWidth} mx-auto flex ${flexDirection} ${textAlign} px-3`}
+      className={`${baseMarginTop} mb-16 ${maxWidth} mx-auto flex ${flexDirection} ${textAlign} ${flexDirection !== "flex-col" ? "max-lg:flex-wrap max-lg:justify-center" : ""} px-3`}
     >
       <h2
-        className={`${titleColor} ${flexDirection !== "flex-col" ? "w-[44%]" : "w-auto"} text-[2.625rem] tracking-tight leading-16.5 ${titleMarginBottom} whitespace-pre-line`}
+        className={`${titleClass + " " ?? titleClass}${titleColor} ${flexDirection !== "flex-col" ? "lg:w-[44%]" : "w-auto"} lg:text-[2.625rem] md:text-3xl text-2xl tracking-tight lg:leading-16.5 md:leading-13 leading-10 ${titleMarginBottom} whitespace-pre-line capitalize`}
       >
         {title}
       </h2>
       <p
-        className={`${subtitleColor} ${flexDirection !== "flex-col" ? "w-[56%] ps-8 text-justify" : "w-auto"} md:text-lg leading-7.5`}
+        className={`${subtitleClass + " " ?? subtitleClass}${subtitleColor} ${flexDirection !== "flex-col" ? "lg:w-[56%] lg:ps-8 lg:text-justify text-center" : "w-auto"} lg:text-lg max-sm:text-sm lg:leading-7.5 sm:leading-6`}
       >
         {subtitle}
       </p>

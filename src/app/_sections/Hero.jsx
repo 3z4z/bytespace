@@ -2,20 +2,36 @@
 
 import Image from "next/image";
 import { SearchIcon } from "@/components/icons/Icons";
-import HeaderComponent from "@/components/shared/Header";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import { animShapesData } from "@/utils/data";
+import { ScrollTrigger } from "gsap/all";
+import InputGroup from "@/components/ui/InputGroup";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const containerRef = useRef(null);
+  const text = `Get Access to Hundreds Courses Available`;
+
+  const avatarData = [
+    { src: "https://picsum.photos/id/64/4326/2884", alt: "user1" },
+    { src: "https://picsum.photos/id/9/5000/3269", alt: "user2" },
+    { src: "https://picsum.photos/id/22/4434/3729", alt: "user3" },
+  ];
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+      const tl = gsap.timeline({
+        defaults: { ease: "expo.out" },
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          toggleActions: "play pause resume none",
+        },
+      });
 
       tl.from(".char", {
         duration: 0.04,
@@ -133,13 +149,10 @@ export default function HeroSection() {
     { scope: containerRef },
   );
 
-  const text = `Get Access to Hundreds Courses Available`;
-
   return (
     <section
       ref={containerRef}
-      className="relative bg-secondary bg-[linear-gradient(to_right,#ffffff32_1px,transparent_1px),linear-gradient(to_bottom,#ffffff32_1px,transparent_1px)]
-  bg-size-[120px_120px] overflow-hidden min-h-screen"
+      className="relative bg-grid-secondary overflow-hidden"
     >
       <main className="base-container">
         <div className="max-w-232 mx-auto *:text-center text-white">
@@ -162,68 +175,31 @@ export default function HeroSection() {
             business with our wide range of courses.
           </p>
         </div>
-
-        <div className="search-container mt-15 max-w-145 flex gap-4 items-center mx-auto max-sm:flex-wrap max-sm:justify-center">
-          <div className="relative w-full">
-            <SearchIcon className="text-shuttle-gray-400 absolute top-1/2 -translate-y-1/2 left-6 z-1" />
-            <input
-              type="text"
-              className="input text-lg w-full py-6! pe-6 px-14 focus:border-electric-lime-500"
-              placeholder="Course, topic, creator"
-            />
-          </div>
-          <button className="btn btn-primary btn-lg py-3 px-6">Search</button>
-        </div>
+        <InputGroup
+          Icon={SearchIcon}
+          buttonTitle="Search"
+          marginTop="mt-15"
+          motionClass="search-container"
+          placeholderText="Course, topic, creator"
+        />
 
         <div className="hero-img-container flex justify-center relative *:select-none mt-10">
-          <Image
-            src={"/images/hero-shapes/shape1.png"}
-            width={300}
-            height={300}
-            alt="shape1"
-            className="shape1 hidden md:block absolute top-1/2 left-1/2 z-10 object-contain pointer-events-none"
-          />
-          <Image
-            src={"/images/hero-shapes/shape2.png"}
-            width={300}
-            height={300}
-            alt="shape2"
-            className="shape2 hidden md:block absolute top-1/2 left-1/2 z-10 object-contain pointer-events-none"
-          />
-          <Image
-            src={"/images/hero-shapes/shape3.png"}
-            width={240}
-            height={240}
-            alt="shape3"
-            className="shape3 hidden md:block absolute top-1/2 left-1/2 z-10 object-contain pointer-events-none"
-          />
-          <Image
-            src={"/images/hero-shapes/shape4.png"}
-            width={260}
-            height={260}
-            alt="shape4"
-            className="shape4 hidden md:block absolute top-1/2 left-1/2 z-10 object-contain pointer-events-none"
-          />
-          <Image
-            src={"/images/hero-shapes/shape5.png"}
-            width={150}
-            height={150}
-            alt="shape5"
-            className="shape5 hidden md:block absolute top-1/2 left-1/2 z-10 object-contain pointer-events-none"
-          />
-          <Image
-            src={"/images/hero-shapes/shape6.png"}
-            width={200}
-            height={200}
-            alt="shape6"
-            className="shape6 hidden md:block absolute top-1/2 left-1/2 z-10 object-contain pointer-events-none"
-          />
+          {animShapesData.map((shape, index) => (
+            <Image
+              key={index}
+              src={shape.src}
+              alt={shape.src}
+              width={shape.width}
+              height={shape.height}
+              className={`${shape.specialClass} hidden md:block absolute top-1/2 left-1/2 z-10 object-contain pointer-events-none`}
+            />
+          ))}
 
           <div className="absolute inset-0 overflow-hidden pointer-events-none flex justify-center">
             <div className="bg-circle absolute top-1/5 left-1/2 -translate-x-1/2 aspect-square w-full max-w-[calc(100%-2rem)] rounded-full bg-primary"></div>
           </div>
 
-          <figure className="relative z-10">
+          <div className="relative z-10 max-md:pb-10">
             <Image
               src={"/images/hero.png"}
               width={580}
@@ -263,33 +239,17 @@ export default function HeroSection() {
                 </span>
               </div>
               <div className="avatar-group -space-x-3 rtl:space-x-reverse items-center">
-                <div className="avatar size-7 sm:size-8">
-                  <Image
-                    src="https://picsum.photos/id/64/4326/2884"
-                    alt="user1"
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                </div>
-                <div className="avatar size-7 sm:size-8">
-                  <Image
-                    src="https://picsum.photos/id/9/5000/3269"
-                    alt="user2"
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                </div>
-                <div className="avatar size-7 sm:size-8">
-                  <Image
-                    src="https://picsum.photos/id/22/4434/3729"
-                    alt="user3"
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                </div>
+                {avatarData.map((avatar, index) => (
+                  <figure key={index} className="avatar size-7 sm:size-8">
+                    <Image
+                      src={avatar.src}
+                      alt={avatar.alt}
+                      width={32}
+                      height={32}
+                      className="rounded-full"
+                    />
+                  </figure>
+                ))}
                 <div className="avatar placeholder size-7 sm:size-8">
                   <div className="bg-primary text-black rounded-full font-bold text-xs flex items-center justify-center size-full">
                     2K+
@@ -297,7 +257,7 @@ export default function HeroSection() {
                 </div>
               </div>
             </div>
-          </figure>
+          </div>
         </div>
       </main>
     </section>

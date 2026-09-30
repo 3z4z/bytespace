@@ -25,7 +25,7 @@ export default function NavbarResponsiveComponent({ isOpen }) {
 
   return (
     <nav
-      className={`${isOpen ? "left-0" : "left-full"} transition-all md:hidden fixed top-0 left-0 w-full h-screen bg-persian-blue-900 text-base-100 py-8 pt-32 flex items-center flex-col gap-5`}
+      className={`${isOpen ? "left-0" : "left-full"} transition-all lg:hidden fixed top-0 left-0 w-full h-screen bg-persian-blue-900 text-base-100 py-8 pt-32 flex items-center flex-col gap-5`}
     >
       {links.map((l, i) => (
         <Link key={i} href={l.path} className="sm:text-lg">

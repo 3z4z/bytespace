@@ -36,7 +36,7 @@ export default function NavbarComponent() {
   ];
 
   return (
-    <nav ref={containerRef} className="flex h-min gap-6 max-md:hidden">
+    <nav ref={containerRef} className="flex h-min gap-6 max-lg:hidden">
       {links.map((l) => (
         <Link
           key={l.path}

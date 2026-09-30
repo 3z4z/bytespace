@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import gsap from "gsap";
 
-export default function BrandLogo({ textColor }) {
+export default function BrandLogo({ textColor, motion = true }) {
   const containerRef = useRef();
 
   useGSAP(
@@ -28,11 +28,15 @@ export default function BrandLogo({ textColor }) {
     { scope: containerRef },
   );
   return (
-    <Link ref={containerRef} href={"/"} className="flex items-center gap-2 z-2">
+    <Link
+      ref={motion ? containerRef : null}
+      href={"/"}
+      className="flex items-center gap-2 z-2"
+    >
       <figure className="relative size-8">
         <Image
           fill
-          src={"logo.svg"}
+          src={"/logo.svg"}
           className="object-contain"
           alt="Brand Logo"
         />

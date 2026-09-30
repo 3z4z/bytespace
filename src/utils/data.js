@@ -210,3 +210,48 @@ export const customerReviews = [
       "As a creator, ByteSpace has been a game-changer for me. The Course Editor is user-friendly, and the support from the community is incredible. It's fulfilling to see my courses making a positive impact on learners globally.",
   },
 ];
+
+export const animShapesData = [
+  {
+    src: "/images/hero-shapes/shape1.png",
+    width: 300,
+    height: 300,
+    alt: "shape1",
+    specialClass: "shape1",
+  },
+  {
+    src: "/images/hero-shapes/shape2.png",
+    width: 300,
+    height: 300,
+    alt: "shape2",
+    specialClass: "shape2",
+  },
+  {
+    src: "/images/hero-shapes/shape3.png",
+    width: 240,
+    height: 240,
+    alt: "shape3",
+    specialClass: "shape3",
+  },
+  {
+    src: "/images/hero-shapes/shape4.png",
+    width: 260,
+    height: 260,
+    alt: "shape4",
+    specialClass: "shape4",
+  },
+  {
+    src: "/images/hero-shapes/shape5.png",
+    width: 150,
+    height: 150,
+    alt: "shape5",
+    specialClass: "shape5",
+  },
+  {
+    src: "/images/hero-shapes/shape6.png",
+    width: 200,
+    height: 200,
+    alt: "shape6",
+    specialClass: "shape6",
+  },
+];
