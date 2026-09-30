@@ -7,8 +7,12 @@ import SocialLogin from "@/components/shared/SocialLogin";
 import AuthFormCard from "@/components/ui/AuthFormCard";
 import { className } from "@/utils/className";
 import { regex } from "@/utils/regex";
+import { toastConfig } from "@/utils/toastConfig";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
   const {
@@ -23,7 +27,8 @@ export default function RegisterPage() {
       password: "",
     },
   });
-  const onRegisterSubmit = (data) => {
+  const router = useRouter();
+  const onRegisterSubmit = async (data) => {
     const freshName = data.name.replace(/\s+/g, " ").trim();
     const freshEmail = data.email.trim().toLowerCase();
 
@@ -34,6 +39,26 @@ export default function RegisterPage() {
     };
 
     console.log(freshData);
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(freshData),
+    });
+    const result = await res.json();
+    if (result.success) {
+      await signIn("credentials", {
+        email: freshEmail,
+        password: data.password,
+        redirect: false,
+      });
+    }
+    router.push("/");
+    toast.success("Registration success!", {
+      ...toastConfig,
+      position: "top-center",
+    });
   };
 
   return (

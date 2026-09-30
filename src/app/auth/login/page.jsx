@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  FacebookIcon,
-  GoogleIcon,
-  SpinnerIcon,
-} from "@/components/icons/Icons";
+import { SpinnerIcon } from "@/components/icons/Icons";
 import AuthContentComponent from "@/components/shared/AuthContent";
 import AuthFormTitleComponent from "@/components/shared/AuthFormTitle";
 import SocialLogin from "@/components/shared/SocialLogin";
@@ -12,11 +8,14 @@ import AuthFormCard from "@/components/ui/AuthFormCard";
 import { className } from "@/utils/className";
 import { regex } from "@/utils/regex";
 import { toastConfig } from "@/utils/toastConfig";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function LoginPage() {
+  const router = useRouter();
   const {
     register,
     formState: { errors, isSubmitting },
@@ -33,16 +32,24 @@ export default function LoginPage() {
       e.preventDefault();
     }
   };
-  const handleFacebookLogin = () => {
-    const errorMessage = "Facebook login under maintenance. Try again later.";
-    toast.error(errorMessage, { ...toastConfig });
-  };
 
-  const handleGoogleLogin = () => {
-    toast.info("Google login coming soon!", { ...toastConfig });
-  };
-  const onLoginSubmit = (data) => {
-    console.log(data);
+  const onLoginSubmit = async (data) => {
+    const { email } = data;
+    const freshEmail = email.trim().toLowerCase();
+    const res = await signIn("credentials", {
+      email: freshEmail,
+      password: data.password,
+      redirect: false,
+    });
+    if (res?.error) {
+      toast.error("login failed");
+    } else {
+      router.push("/");
+      toast.success("Login successful. Welcome back!", {
+        ...toastConfig,
+        position: "top-center",
+      });
+    }
   };
   return (
     <AuthContentComponent
@@ -87,7 +94,7 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="******"
-              className={className(errors.email)}
+              className={className(errors.password)}
               {...register("password", {
                 required: regex.password.required,
                 pattern: {
