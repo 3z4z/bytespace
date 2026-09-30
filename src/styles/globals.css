@@ -1,26 +1,110 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@plugin "daisyui" {
+  themes: light --default;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@import "./backgrounds.css";
+
+@theme {
+  /* Shuttle Gray */
+  --color-shuttle-gray-50: #f5f5f6;
+  --color-shuttle-gray-100: #e5e6e8;
+  --color-shuttle-gray-200: #ced0d3;
+  --color-shuttle-gray-300: #abaeb5;
+  --color-shuttle-gray-400: #82868e;
+  --color-shuttle-gray-500: #666973;
+  --color-shuttle-gray-600: #585a62;
+  --color-shuttle-gray-700: #4b4c53;
+  --color-shuttle-gray-800: #424348;
+  --color-shuttle-gray-900: #3a3b3f;
+  --color-shuttle-gray-950: #242528;
+
+  /* Persian Blue */
+  --color-persian-blue-50: #e7f6ff;
+  --color-persian-blue-100: #d3eeff;
+  --color-persian-blue-200: #b0ddff;
+  --color-persian-blue-300: #81c5ff;
+  --color-persian-blue-400: #4f9dff;
+  --color-persian-blue-500: #2872ff;
+  --color-persian-blue-600: #0445ff;
+  --color-persian-blue-700: #0043ff;
+  --color-persian-blue-800: #003be2;
+  --color-persian-blue-900: #0b36a4;
+  --color-persian-blue-950: #071e5f;
+
+  /* Electric Lime */
+  --color-electric-lime-50: #fdffe4;
+  --color-electric-lime-100: #faffc5;
+  --color-electric-lime-200: #f2ff92;
+  --color-electric-lime-300: #e4ff54;
+  --color-electric-lime-400: #d4fb20;
+  --color-electric-lime-500: #cbfc01;
+  --color-electric-lime-600: #8cb400;
+  --color-electric-lime-700: #6a8902;
+  --color-electric-lime-800: #546b09;
+  --color-electric-lime-900: #465a0d;
+  --color-electric-lime-950: #243300;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-primary: var(--color-electric-lime-500);
+  --color-primary-content: var(--color-shuttle-gray-900);
+  --color-secondary: var(--color-persian-blue-800);
+  --color-base-100: var(--color-shuttle-gray-50);
+  --color-base-content: var(--color-shuttle-gray-950);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-satoshi);
+  background-color: var(--color-white);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-poppins);
+}
+h1,
+h2,
+h3 {
+  font-weight: 600;
+}
+
+h4 {
+  font-weight: 500;
+}
+
+.font-clash {
+  font-family: var(--font-clash-bold);
+}
+
+.base-container {
+  @apply max-w-360 w-full mx-auto px-3;
+}
+
+.btn,
+.input {
+  @apply rounded-full;
+}
+
+input {
+  @apply outline-0! transition;
+}
+
+.bg-gradient-rtl {
+  @apply bg-white bg-[radial-gradient(ellipse_at_20%_15%,#eefc55_0%,transparent_50%),radial-gradient(ellipse_at_85%_10%,#e0e7ff_0%,transparent_45%),radial-gradient(ellipse_at_5%_50%,#dbeafe_0%,transparent_45%),radial-gradient(ellipse_at_85%_85%,#c7d2fe_0%,transparent_50%),radial-gradient(ellipse_at_10%_90%,#eefc55_0%,transparent_40%)];
+}
+
+.bg-gradient-ltr {
+  @apply bg-white bg-[radial-gradient(ellipse_at_50%_0%,#eefc55_0%,transparent_60%),radial-gradient(ellipse_at_100%_15%,#f7fee7_0%,transparent_50%),radial-gradient(ellipse_at_0%_90%,#c7d2fe_0%,transparent_55%)];
+}
+
+.bg-grid-secondary {
+  @apply bg-secondary bg-[linear-gradient(to_right,#ffffff32_1px,transparent_1px),linear-gradient(to_bottom,#ffffff32_1px,transparent_1px)] bg-size-[120px_120px];
 }
