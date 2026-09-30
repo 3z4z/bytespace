@@ -23,7 +23,10 @@ const clashDisplay = localFont({
 });
 
 export const metadata = {
-  title: "ByteSpace - Get Access to Hundreds Courses Available",
+  title: {
+    template: "%s | ByteSpace",
+    default: "ByteSpace - Get Access to Hundreds Courses Available",
+  },
   description:
     "Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.",
 };
