@@ -23,7 +23,7 @@ export default function AuthContentComponent({ title, subtitle, children }) {
               />
             </figure>
           </div>
-          <div className="max-w-xl w-full mx-auto max-lg:mb-12">{children}</div>
+          <div className="max-w-xl w-full mx-auto mb-12">{children}</div>
         </main>
       </div>
     </section>
