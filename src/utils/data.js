@@ -8,7 +8,6 @@ import {
 } from "@/components/icons/Icons";
 
 export const categories = [
-  { name: "Featured", featured: false },
   { name: "Music", featured: false },
   { name: "Drawing & Painting", featured: false },
   { name: "Marketing", featured: false },

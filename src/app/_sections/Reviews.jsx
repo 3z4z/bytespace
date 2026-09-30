@@ -4,12 +4,13 @@ import { customerReviews } from "@/utils/data";
 
 export default function ReviewsSection() {
   return (
-    <section className="relative pb-20 w-full bg-gradient-ltr">
+    <section className="relative lg:py-18 sm:py-14 py-12 w-full bg-gradient-ltr">
       <SectionTitle
         maxWidth="base-container"
         flexDirection="flex-row"
         title={"Discover What Our Community Is Saying"}
         subtitleColor="text-shuttle-gray-700"
+        baseMarginTop="lg:mt-18"
         textAlign="lg:text-left text-center"
         subtitle={`At ByteSpace, our vibrant community of learners and creators is at the heart of what we do. Hear directly from those who have experienced the transformative journey of learning and creating on our platform. Explore testimonials that reflect the diverse perspectives of enthusiastic learners and accomplished creators.`}
       />
