@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "../styles/globals.css";
 import HeaderComponent from "@/components/shared/Header";
 import FooterComponent from "@/components/shared/Footer";
+import AppLayoutWrapper from "@/components/shared/AppLayoutWrapper";
+import { ToastContainer } from "react-toastify";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -33,9 +35,8 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} ${satoshi.variable} ${clashDisplay.variable} h-full antialiased`}
     >
       <body className="min-h-dvh flex flex-col">
-        <HeaderComponent />
-        <main className="flex-1">{children}</main>
-        <FooterComponent />
+        <AppLayoutWrapper>{children}</AppLayoutWrapper>
+        <ToastContainer />
       </body>
     </html>
   );
