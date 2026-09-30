@@ -18,15 +18,15 @@ export default function HomePage() {
   useEffect(() => {
     if (status === "authenticated") {
       const hasToasted = sessionStorage.getItem("toasted");
-
-      if (!hasToasted) {
+      if (!hasToasted && session?.user?.provider !== "credentials") {
         toast.success(`Welcome back, ${session?.user?.name || "user"}!`, {
           ...toastConfig,
         });
+
         sessionStorage.setItem("toasted", "true");
       }
     } else if (status === "unauthenticated") {
-      sessionStorage.removeItem("toasted", "true");
+      sessionStorage.removeItem("toasted");
     }
   }, [status, session]);
   return (
